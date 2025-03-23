@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 @layer base {
   :root {
@@ -82,7 +83,7 @@
   body {
     @apply bg-background text-foreground;
     background-image: radial-gradient(circle at top left, hsl(262, 80%, 10%), transparent),
-                      radial-gradient(circle at top right, hsl(262, 60%, 15%), transparent),
+                      radial-gradient(circle at top right, hsl(280, 60%, 15%), transparent),
                       radial-gradient(at bottom left, hsl(240, 60%, 10%), transparent);
     background-size: 200% 200%;
     animation: gradient-background 15s ease infinite;
@@ -91,27 +92,29 @@
 
 @layer components {
   .element-card {
-    @apply relative flex flex-col items-center justify-center p-1 border rounded-md transition-all duration-300 backdrop-blur-sm bg-opacity-50 cursor-pointer overflow-hidden;
+    @apply relative flex flex-col items-center justify-center p-1 border rounded-md transition-all duration-300 backdrop-blur-sm bg-opacity-50 cursor-pointer overflow-hidden shadow-sm;
+    min-height: 70px;
   }
   
   .element-card:hover {
-    @apply transform scale-110 shadow-lg z-10;
+    @apply transform scale-110 shadow-lg z-10 bg-opacity-70;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
   }
   
   .element-symbol {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold font-mono tracking-tighter;
   }
   
   .element-number {
-    @apply text-xs absolute top-1 left-1;
+    @apply text-xs absolute top-1 left-1 font-mono;
   }
   
   .element-name {
-    @apply text-xs font-medium mt-1 text-center;
+    @apply text-xs font-medium mt-1 text-center max-w-full truncate px-0.5;
   }
   
   .element-weight {
-    @apply text-xs opacity-80;
+    @apply text-xs opacity-80 font-mono tracking-tight;
   }
   
   .glass-card {
@@ -132,6 +135,10 @@
 
   .modal-content {
     @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 glass-card rounded-2xl p-6 w-[90vw] max-w-2xl max-h-[85vh] overflow-y-auto animate-scale-in;
+  }
+  
+  .category-badge {
+    @apply px-2.5 py-1 rounded-full text-xs font-medium inline-flex items-center justify-center;
   }
 }
 
@@ -161,4 +168,21 @@
     animation: twinkle var(--twinkle-duration) ease-in-out infinite;
     animation-delay: var(--twinkle-delay);
   }
+}
+
+/* Add element category color glow effects */
+.bg-alkali { --element-glow: rgba(255, 107, 107, 0.3); }
+.bg-alkaline { --element-glow: rgba(254, 202, 87, 0.3); }
+.bg-transition { --element-glow: rgba(72, 219, 251, 0.3); }
+.bg-post-transition { --element-glow: rgba(84, 160, 255, 0.3); }
+.bg-metalloid { --element-glow: rgba(95, 39, 205, 0.3); }
+.bg-nonmetal { --element-glow: rgba(29, 209, 161, 0.3); }
+.bg-halogen { --element-glow: rgba(0, 210, 211, 0.3); }
+.bg-noble-gas { --element-glow: rgba(147, 112, 219, 0.3); }
+.bg-lanthanide { --element-glow: rgba(255, 159, 243, 0.3); }
+.bg-actinide { --element-glow: rgba(255, 234, 167, 0.3); }
+.bg-unknown { --element-glow: rgba(164, 176, 190, 0.3); }
+
+.element-card:hover {
+  box-shadow: 0 0 20px var(--element-glow);
 }

@@ -53,18 +53,22 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Element categories
-        alkali: "#ff6b6b",
-        alkaline: "#feca57",
-        transition: "#48dbfb",
-        "post-transition": "#54a0ff",
-        metalloid: "#5f27cd",
-        nonmetal: "#1dd1a1",
-        halogen: "#00d2d3",
-        "noble-gas": "#9370DB",
-        lanthanide: "#ff9ff3",
-        actinide: "#ffeaa7",
+        // Element categories - improved colors
+        alkali: "#ff5a6a",
+        alkaline: "#ffbc5c",
+        transition: "#35beff",
+        "post-transition": "#4c96ff",
+        metalloid: "#6a3de6",
+        nonmetal: "#0edfa1",
+        halogen: "#00e5e6",
+        "noble-gas": "#a875ff",
+        lanthanide: "#ff8cef",
+        actinide: "#ffd952",
         unknown: "#a4b0be",
+      },
+      fontFamily: {
+        mono: ["'Space Mono'", "monospace"],
+        sans: ["'Inter'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -117,6 +121,10 @@ export default {
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
         },
+        "glow": {
+          "0%, 100%": { boxShadow: "0 0 10px var(--element-glow)" },
+          "50%": { boxShadow: "0 0 20px var(--element-glow)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -130,6 +138,7 @@ export default {
         "float": "float 3s ease-in-out infinite",
         "pulse-slow": "pulse-slow 3s ease-in-out infinite",
         "gradient-background": "gradient-background 15s ease infinite",
+        "glow": "glow 2s ease-in-out infinite",
       },
     },
   },
