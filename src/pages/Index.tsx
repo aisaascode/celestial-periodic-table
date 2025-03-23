@@ -5,6 +5,7 @@ import PeriodicTable from "../components/PeriodicTable";
 import Stars from "../components/Stars";
 import { Button } from "../components/ui/button";
 import { cn } from "../lib/utils";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const Index: React.FC = () => {
   return (
@@ -41,7 +42,9 @@ const Index: React.FC = () => {
           </Button>
         </div>
         
-        <PeriodicTable />
+        <TooltipProvider>
+          <PeriodicTable />
+        </TooltipProvider>
       </main>
       
       <footer className="py-6 border-t border-border/40 backdrop-blur-sm">
