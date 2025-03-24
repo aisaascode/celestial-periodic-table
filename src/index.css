@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +6,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 @layer base {
-  :root {
+  :root,
+  .light {
+    --background: 240 27% 97%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 262 83% 58%;
+  }
+
+  .dark {
     --background: 240 27% 12%;
     --foreground: 240 10% 95%;
 
@@ -35,38 +65,6 @@
     --border: 240 19% 30%;
     --input: 240 19% 30%;
     --ring: 262 83% 65%;
-
-    --radius: 0.75rem;
-  }
-
-  .light {
-    --background: 0 0% 98%;
-    --foreground: 240 10% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-
-    --primary: 262 80% 50%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-
-    --accent: 262 80% 50%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 262 83% 65%;
   }
 }
 
@@ -82,9 +80,20 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  .dark body {
     background-image: radial-gradient(circle at top left, hsl(262, 80%, 10%), transparent),
                       radial-gradient(circle at top right, hsl(280, 60%, 15%), transparent),
                       radial-gradient(at bottom left, hsl(240, 60%, 10%), transparent);
+    background-size: 200% 200%;
+    animation: gradient-background 15s ease infinite;
+  }
+  
+  .light body {
+    background-image: radial-gradient(circle at top left, hsl(262, 95%, 93%), transparent),
+                      radial-gradient(circle at top right, hsl(280, 95%, 95%), transparent),
+                      radial-gradient(at bottom left, hsl(240, 95%, 95%), transparent);
     background-size: 200% 200%;
     animation: gradient-background 15s ease infinite;
   }
@@ -163,6 +172,14 @@
   border-radius: 50%;
 }
 
+.dark .star {
+  background-color: white;
+}
+
+.light .star {
+  background-color: rgba(72, 72, 182, 0.8);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .star {
     animation: twinkle var(--twinkle-duration) ease-in-out infinite;
@@ -186,3 +203,16 @@
 .element-card:hover {
   box-shadow: 0 0 20px var(--element-glow);
 }
+
+/* Light mode adjustments for elements */
+.light .bg-alkali { border-color: rgba(255, 107, 107, 0.8); background-color: rgba(255, 107, 107, 0.1); }
+.light .bg-alkaline { border-color: rgba(254, 202, 87, 0.8); background-color: rgba(254, 202, 87, 0.1); }
+.light .bg-transition { border-color: rgba(72, 219, 251, 0.8); background-color: rgba(72, 219, 251, 0.1); }
+.light .bg-post-transition { border-color: rgba(84, 160, 255, 0.8); background-color: rgba(84, 160, 255, 0.1); }
+.light .bg-metalloid { border-color: rgba(95, 39, 205, 0.8); background-color: rgba(95, 39, 205, 0.1); }
+.light .bg-nonmetal { border-color: rgba(29, 209, 161, 0.8); background-color: rgba(29, 209, 161, 0.1); }
+.light .bg-halogen { border-color: rgba(0, 210, 211, 0.8); background-color: rgba(0, 210, 211, 0.1); }
+.light .bg-noble-gas { border-color: rgba(147, 112, 219, 0.8); background-color: rgba(147, 112, 219, 0.1); }
+.light .bg-lanthanide { border-color: rgba(255, 159, 243, 0.8); background-color: rgba(255, 159, 243, 0.1); }
+.light .bg-actinide { border-color: rgba(255, 234, 167, 0.8); background-color: rgba(255, 234, 167, 0.1); }
+.light .bg-unknown { border-color: rgba(164, 176, 190, 0.8); background-color: rgba(164, 176, 190, 0.1); }
