@@ -45,11 +45,11 @@ const PeriodicTable: React.FC<PeriodicTableProps> = ({ filters }) => {
     else if (element.category === "actinide" && filters.categories.actinide) categoryMatch = true;
     else if (element.category === "unknown" && filters.categories.unknown) categoryMatch = true;
 
-    // Filter by state (using state property instead of phase)
+    // Filter by state
     let stateMatch = false;
-    if (element.state === "solid" && filters.state.solid) stateMatch = true;
-    else if (element.state === "liquid" && filters.state.liquid) stateMatch = true;
-    else if (element.state === "gas" && filters.state.gas) stateMatch = true;
+    if (element.phase === "solid" && filters.state.solid) stateMatch = true;
+    else if (element.phase === "liquid" && filters.state.liquid) stateMatch = true;
+    else if (element.phase === "gas" && filters.state.gas) stateMatch = true;
 
     return categoryMatch && stateMatch;
   });
