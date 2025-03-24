@@ -1,9 +1,22 @@
 
 import React, { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { LogIn, LogOut, Moon, Sun, User } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import { Button } from "./ui/button";
+import AuthModal from "./AuthModal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const Navbar: React.FC = () => {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const { user, isAuthenticated, signOut } = useAuth();
 
   useEffect(() => {
     // Check for user preference
@@ -62,6 +75,38 @@ const Navbar: React.FC = () => {
         </div>
         
         <nav className="flex items-center gap-4">
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <User size={20} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-background/90 backdrop-blur-md border-white/10">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="text-muted-foreground">
+                  Signed in as {user?.name}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={signOut} className="text-destructive">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="bg-background/40 backdrop-blur-sm border border-white/10"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
+              <LogIn className="mr-2 h-4 w-4" />
+              Sign In
+            </Button>
+          )}
+          
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-muted transition-colors"
@@ -75,6 +120,11 @@ const Navbar: React.FC = () => {
           </button>
         </nav>
       </div>
+      
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </header>
   );
 };
