@@ -19,7 +19,7 @@ const Index: React.FC = () => {
             "text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight",
             "bg-gradient-to-r from-white via-purple-100 to-blue-100 bg-clip-text text-transparent"
           )}>
-            Celestial Periodic Table
+            Galactic Elements
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Explore the elements of our universe through this interactive periodic table.
@@ -49,7 +49,7 @@ const Index: React.FC = () => {
       
       <footer className="py-6 border-t border-border/40 backdrop-blur-sm">
         <div className="container text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Celestial Periodic Table. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Galactic Elements. All rights reserved.</p>
         </div>
       </footer>
     </div>

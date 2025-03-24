@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-primary animate-pulse-slow"></div>
           <h1 className="text-xl font-bold tracking-tight">
-            Celestial Periodic Table
+            Galactic Elements
           </h1>
         </div>
         
