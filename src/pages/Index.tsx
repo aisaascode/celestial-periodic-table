@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import PeriodicTable from "../components/PeriodicTable";
 import Stars from "../components/Stars";
 import { Button } from "../components/ui/button";
-import { FilterCircle, HelpCircle } from "lucide-react";
+import { Filter, HelpCircle } from "lucide-react";
 import { cn } from "../lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ElementFilter, { FilterOptions } from "../components/ElementFilter";
@@ -63,7 +63,7 @@ const Index: React.FC = () => {
             className="bg-secondary/40 backdrop-blur-sm border border-white/5 hover:bg-secondary/60 flex items-center gap-2"
             onClick={() => setShowFilter(true)}
           >
-            <FilterCircle size={18} />
+            <Filter size={18} />
             Filter Elements
           </Button>
           <Button 
