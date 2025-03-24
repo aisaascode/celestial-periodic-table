@@ -1,7 +1,8 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LogIn, LogOut, Moon, Sun, User } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
+import { useTheme } from "../contexts/ThemeContext";
 import { Button } from "./ui/button";
 import AuthModal from "./AuthModal";
 import {
@@ -14,55 +15,9 @@ import {
 } from "./ui/dropdown-menu";
 
 const Navbar: React.FC = () => {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { user, isAuthenticated, signOut } = useAuth();
-
-  useEffect(() => {
-    // Check for user preference
-    const systemPreference = window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-    
-    // Get saved theme from localStorage or use system preference
-    const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
-    const initialTheme = savedTheme || systemPreference;
-    
-    setTheme(initialTheme);
-    applyTheme(initialTheme);
-    
-    // Listen for system preference changes
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem("theme")) {
-        const newTheme = e.matches ? "dark" : "light";
-        setTheme(newTheme);
-        applyTheme(newTheme);
-      }
-    };
-    
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  const applyTheme = (newTheme: "dark" | "light") => {
-    document.documentElement.classList.remove("dark", "light");
-    document.documentElement.classList.add(newTheme);
-    
-    // This ensures proper CSS variable application
-    if (newTheme === "dark") {
-      document.documentElement.style.colorScheme = "dark";
-    } else {
-      document.documentElement.style.colorScheme = "light";
-    }
-  };
-
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    applyTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-background/50 border-b border-border animate-fade-in">
