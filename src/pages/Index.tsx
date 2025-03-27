@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import PeriodicTable from "../components/PeriodicTable";
 import Stars from "../components/Stars";
@@ -8,12 +8,40 @@ import { cn } from "../lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const Index: React.FC = () => {
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  // Add subtle 3D perspective effect on mouse move
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!mainRef.current) return;
+      
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      
+      // Calculate how far the mouse is from the center of the screen
+      const moveX = (clientX - innerWidth / 2) / (innerWidth / 2);
+      const moveY = (clientY - innerHeight / 2) / (innerHeight / 2);
+      
+      // Apply a subtle rotation effect based on mouse position
+      mainRef.current.style.transform = `perspective(1200px) rotateX(${moveY * 2}deg) rotateY(${-moveX * 2}deg)`;
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-hidden">
       <Stars />
       <Navbar />
       
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main 
+        ref={mainRef} 
+        className="flex-1 container mx-auto px-4 py-8 transition-transform duration-300 ease-out"
+      >
         <div className="text-center mb-8 space-y-4 animate-fade-in">
           <h1 className={cn(
             "text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight",
@@ -30,13 +58,13 @@ const Index: React.FC = () => {
         <div className="flex justify-center mb-8 gap-4">
           <Button 
             variant="secondary"
-            className="bg-secondary/40 backdrop-blur-sm border border-white/5 hover:bg-secondary/60"
+            className="bg-secondary/40 backdrop-blur-sm border border-white/5 hover:bg-secondary/60 transform hover:scale-105 transition-transform"
           >
             Filter Elements
           </Button>
           <Button 
             variant="secondary"
-            className="bg-secondary/40 backdrop-blur-sm border border-white/5 hover:bg-secondary/60"
+            className="bg-secondary/40 backdrop-blur-sm border border-white/5 hover:bg-secondary/60 transform hover:scale-105 transition-transform"
           >
             View Legend
           </Button>

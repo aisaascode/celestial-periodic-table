@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,7 +52,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Element categories - improved colors
         alkali: "#ff5a6a",
         alkaline: "#ffbc5c",
         transition: "#35beff",
@@ -112,6 +110,14 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "float-3d": {
+          "0%, 100%": { transform: "translateZ(0) translateY(0)" },
+          "50%": { transform: "translateZ(20px) translateY(-10px)" },
+        },
+        "rotate-slow": {
+          "0%": { transform: "rotateY(0deg)" },
+          "100%": { transform: "rotateY(360deg)" },
+        },
         "pulse-slow": {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
@@ -136,9 +142,14 @@ export default {
         "slide-in": "slide-in 0.3s ease-out",
         "slide-out": "slide-out 0.3s ease-out",
         "float": "float 3s ease-in-out infinite",
+        "float-3d": "float-3d 6s ease-in-out infinite",
+        "rotate-slow": "rotate-slow 20s linear infinite",
         "pulse-slow": "pulse-slow 3s ease-in-out infinite",
         "gradient-background": "gradient-background 15s ease infinite",
         "glow": "glow 2s ease-in-out infinite",
+      },
+      transitionTimingFunction: {
+        "3d-ease": "cubic-bezier(0.25, 0.1, 0.25, 1)",
       },
     },
   },

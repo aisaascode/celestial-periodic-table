@@ -13,15 +13,15 @@ const Stars: React.FC = () => {
     // Clear any existing stars
     container.innerHTML = '';
     
-    // Create stars
-    const starCount = 150;
+    // Create stars with varying depths
+    const starCount = 200; // Increased star count
     
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.className = 'star';
       
-      // Random size between 1px and 3px
-      const size = Math.random() * 2 + 1;
+      // Random size between 1px and 4px
+      const size = Math.random() * 3 + 1;
       star.style.width = `${size}px`;
       star.style.height = `${size}px`;
       
@@ -31,13 +31,43 @@ const Stars: React.FC = () => {
       star.style.left = `${left}px`;
       star.style.top = `${top}px`;
       
-      // Random twinkle animation duration and delay
-      star.style.setProperty('--twinkle-duration', `${Math.random() * 3 + 2}s`);
-      star.style.setProperty('--twinkle-delay', `${Math.random() * 3}s`);
+      // Add 3D depth effect with z-index and opacity
+      const depth = Math.random();
+      star.style.opacity = (0.2 + depth * 0.8).toString();
+      star.style.zIndex = Math.floor(depth * 10).toString();
+      
+      // Different animation speeds based on depth
+      const animationDuration = 2 + (1 - depth) * 5;
+      star.style.setProperty('--twinkle-duration', `${animationDuration}s`);
+      star.style.setProperty('--twinkle-delay', `${Math.random() * 5}s`);
+      
+      // Add parallax effect on mouse move
+      star.dataset.depth = depth.toString();
       
       // Add to container
       container.appendChild(star);
     }
+    
+    // Add parallax movement on mouse move
+    const handleMouseMove = (e: MouseEvent) => {
+      const stars = container.querySelectorAll('.star');
+      const mouseX = e.clientX / window.innerWidth - 0.5;
+      const mouseY = e.clientY / window.innerHeight - 0.5;
+      
+      stars.forEach((star) => {
+        const depth = parseFloat(star.getAttribute('data-depth') || "0");
+        const moveX = mouseX * depth * 30;
+        const moveY = mouseY * depth * 30;
+        
+        star.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
   
   return <div ref={starsContainerRef} className="stars-container"></div>;

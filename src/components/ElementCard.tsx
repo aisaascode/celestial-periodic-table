@@ -23,9 +23,9 @@ const ElementCard: React.FC<ElementCardProps> = ({ element, onClick }) => {
         <TooltipTrigger asChild>
           <div
             className={cn(
-              "element-card flex flex-col items-center justify-center p-1 rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer overflow-hidden border",
+              "element-card flex flex-col items-center justify-center p-1 rounded-md transition-all duration-300 backdrop-blur-sm cursor-pointer overflow-hidden border transform perspective-500",
               categoryColor,
-              "hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:scale-110 hover:z-10"
+              "hover:shadow-[0_0_15px_var(--element-glow)] hover:scale-110 hover:z-10 hover:rotate-y-5 hover:translate-z-10"
             )}
             onClick={onClick}
           >
