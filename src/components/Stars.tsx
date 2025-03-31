@@ -59,7 +59,8 @@ const Stars: React.FC = () => {
         const moveX = mouseX * depth * 30;
         const moveY = mouseY * depth * 30;
         
-        star.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        // Fix: Cast the Element to HTMLElement to access style property
+        (star as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
     };
     
